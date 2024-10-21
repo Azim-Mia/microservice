@@ -1,0 +1,14 @@
+const express = require('express');
+const productRouter = express.Router();
+const limiter = require('../middleWare/apiSecurity.js');
+const createProduct = require('../controllers/createProduct.js');
+const readProduct = require('../controllers/readProduct.js');
+const findSingleProduct = require('../controllers/findSingleProduct.js');
+const updateProduct = require('../controllers/updateProduct.js');
+const deleteProduct = require('../controllers/deleteProduct.js');
+productRouter.post('/create',limiter, createProduct);
+productRouter.get('/read', readProduct);
+productRouter.get('/find/:id', findSingleProduct);
+productRouter.put('/update/:id', updateProduct);
+productRouter.delete('/delete/:id',deleteProduct);
+module.exports = productRouter;
