@@ -6,6 +6,7 @@ const productSchema = new Schema({
   },
   inventoryId:{
     type:String,
+    default:null,
   },
   name:{
    type:String, 
@@ -23,13 +24,21 @@ const productSchema = new Schema({
   required:[true, "Price is empty"],
   },
   image:{
-    type:String,
-    default:null,
+    type:Array,
+    default:["null"],
   },
   status:{
     type: String,
     enum:["DRAFT", "PUBLIST", "UNLISTED"],
     default:"DRAFT",
+  },
+   stock:{
+    type:Number,
+    default:0,
+  },
+  stockStatus:{
+   type:String,
+   default:"out of stock",
   },
   createAt:{
     type:Date,

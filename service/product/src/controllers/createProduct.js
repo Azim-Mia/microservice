@@ -15,29 +15,24 @@ const addProduct =new Product(data);
 const datas ={
   sku:data.sku,
   productId:data.id,
-  quantity:req.body.quantity || 0,
-  actionType:req.body.actionType || "IN",
-  historis:{
-    actionType:req.body.actionType || "IN",
-      quantityChange:req.body.quantity || 0,
-      lastQuantity:0,
-      newQuantity:req.body.quantity || 0,
-  }
 };
 // create inventory this product
 const inventoryCreateSuccess = await axios.post('http://localhost:4002/inventory',datas);
 if(!inventoryCreateSuccess.data){
   res.json({success:false,message:"Product route from inventory problem"});
 }
-// inventory id use as product key inventoryId..
-const inventoryId=inventoryCreateSuccess.data.resultInventory.id;
+// inventory id use as product key 
+const {id, quantity}=inventoryCreateSuccess.data.resultInventory;
 
-//update product add inventoryId
-if(inventoryId){
- addProduct.inventoryId=inventoryId; 
-}
+//update product start...
+ addProduct.inventoryId=id || null; 
+ addProduct.stock = quantity || 0;
+ if(quantity> 0){
+   addProduct.stockStatus ="in stock";
+ }
+//update product end...
 
-//finaly save product
+//finally save product
 const result = await addProduct.save();
 if(!result){
   res.json({success:false,message:"Product crate problem"});

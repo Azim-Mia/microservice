@@ -7,7 +7,7 @@ const findSingleProduct = require('../controllers/findSingleProduct.js');
 const updateProduct = require('../controllers/updateProduct.js');
 const deleteProduct = require('../controllers/deleteProduct.js');
 productRouter.post('/create',limiter, createProduct);
-productRouter.get('/read', readProduct);
+productRouter.get('/find', readProduct);
 productRouter.get('/find/:id', findSingleProduct);
 productRouter.put('/update/:id', updateProduct);
 productRouter.delete('/delete/:id',deleteProduct);

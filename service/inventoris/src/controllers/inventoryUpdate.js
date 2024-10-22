@@ -14,21 +14,22 @@ const updateInventory =async(req,res,next)=>{
     const history =  await History.find()
    const lastHistory= history.toSorted((a,b)=>b.createAt - a.createAt);
    //change quantity
-    let newQuantity = inventory.historis[0].newQuantity;
+    let newQuantity = inventory.historis[0].newQuantity || 0;
+    console.log(newQuantity)
     if(data.actionType == "IN"){
-      newQuantity += data.quantity;
+      newQuantity += Number(data.quantity);
     }else{
-      newQuantity -= data.quantity;
+      newQuantity -= Number(data.quantity);
     };
     
   const updateOptions= { new:true, runValidators:true, context:'query'};
     const filter =  {
     id:hsId,
-  quantity:newQuantity,
+  quantity:Number(newQuantity),
     historis:{
     id:hsId,
       actionType:data.actionType,
-      quantityChange:data.quantity,
+      quantityChange:Number(data.quantity),
      newQuantity:newQuantity,
      lastQuantity:lastHistory[0]?.newQuantity || 0
     }

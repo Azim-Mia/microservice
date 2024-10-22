@@ -11,7 +11,7 @@ const inventorySchema= new Schema({
  actionType: {
         type: String,
         enum : ['IN','OUT'],
-        default: 'empty'
+        default:null,
     },
   quantity:{
     type:Number,
@@ -47,7 +47,7 @@ const historySchema= new Schema({
   actionType: {
         type: String,
         enum : ['IN','OUT'],
-        default: 'empty'
+        default:null,
     },
   quantityChange:{
     type:Number,

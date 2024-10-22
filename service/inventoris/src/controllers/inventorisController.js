@@ -2,10 +2,8 @@ const {Inventory,History} =require('../schemas.js');
 const { v4: uuidv4 } = require('uuid');
 const inventorisController =async(req,res,next)=>{
 try{
-//const {id,actionType,quantity,sku}=req.body;
 const data ={id:uuidv4(), ...req.body,
   historis:{
-      actionType:req.body.actionType,
       quantityChange:Number(req.body.quantity),
       lastQuantity:0,
       newQuantity:Number(req.body.quantity),
