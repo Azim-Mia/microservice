@@ -1,6 +1,6 @@
 const {Schema, model} =require("mongoose");
 const productSchema = new Schema({
-  id:{
+  productId:{
     type:String,
     required:[true, "product id is empty"],
   },
@@ -31,14 +31,6 @@ const productSchema = new Schema({
     type: String,
     enum:["DRAFT", "PUBLIST", "UNLISTED"],
     default:"DRAFT",
-  },
-   stock:{
-    type:Number,
-    default:0,
-  },
-  stockStatus:{
-   type:String,
-   default:"out of stock",
   },
   createAt:{
     type:Date,

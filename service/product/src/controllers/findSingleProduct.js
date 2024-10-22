@@ -5,12 +5,11 @@ const findSingleProduct = async(req,res,next)=>{
 try{
   const {id}=req.params;
   let inventoryId;
-  const findProduct = await Product.findOne({id:id});
+  const findProduct = await Product.findOne({productId:id});
   //console.log(userId);
   if(!findProduct){
   return  res.status(404).json({success:false, message:"Not found Product this " + id});
   };
-  const userId = findProduct._id;
 if(findProduct.inventoryId === "null"){
 const datas ={
    id:findProduct._id,
@@ -33,7 +32,14 @@ const datas ={
   console.log(result);
   }
 };
-res.status(200).json({success:true, message:"successfull", findProduct});
+const userId = findProduct._id;
+const getInventory = await axios.get("http://localhost:4002/inventory");
+const {quantity} = getInventory.data.result[0];
+res.status(200).json({success:true, message:"successfull", 
+ findProduct,
+  stock:quantity || 0,
+  stockStatus: quantity ? 'in stock':'out of stock',
+});
 }catch(error){
   res.status(500).send(error.message);
 }

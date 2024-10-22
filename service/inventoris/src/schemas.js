@@ -1,7 +1,7 @@
 const {Schema,model}=require('mongoose');
 const mongoose =require('mongoose');
 const inventorySchema= new Schema({
-  id:{
+  inventoryId:{
    type:String,
   },
   sku:{
@@ -40,7 +40,7 @@ const inventorySchema= new Schema({
 const Inventory=new model('inventory', inventorySchema);
 
 const historySchema= new Schema({
-  id:{
+  historyId:{
    type:String,
    required:[true, 'id is empty'],
   },
@@ -65,6 +65,7 @@ const historySchema= new Schema({
   },
   inventoryId:{
     type:String,
+    ref:'inventory',
   },
   createAt:{
     type:Date,

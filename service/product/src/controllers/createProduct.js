@@ -9,23 +9,23 @@ if(matchData){
   return;
 }
 //data initiallize
-const data = {id:uuidv4(), inventoryId:"",...req.body};
+const data = {productId:uuidv4(), inventoryId:"",...req.body};
 const addProduct =new Product(data);
 //data initiallize
 const datas ={
   sku:data.sku,
-  productId:data.id,
+  productId:data.productId,
 };
 // create inventory this product
 const inventoryCreateSuccess = await axios.post('http://localhost:4002/inventory',datas);
+console.log(inventoryCreateSuccess.data)
 if(!inventoryCreateSuccess.data){
   res.json({success:false,message:"Product route from inventory problem"});
 }
 // inventory id use as product key 
-const {id, quantity}=inventoryCreateSuccess.data.resultInventory;
-
+const {inventoryId, quantity}=inventoryCreateSuccess.data.resultInventory;
 //update product start...
- addProduct.inventoryId=id || null; 
+ addProduct.inventoryId=inventoryId || null;
  addProduct.stock = quantity || 0;
  if(quantity> 0){
    addProduct.stockStatus ="in stock";

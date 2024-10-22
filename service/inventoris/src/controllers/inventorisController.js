@@ -2,7 +2,7 @@ const {Inventory,History} =require('../schemas.js');
 const { v4: uuidv4 } = require('uuid');
 const inventorisController =async(req,res,next)=>{
 try{
-const data ={id:uuidv4(), ...req.body,
+const data ={inventoryId:uuidv4(), ...req.body,
   historis:{
       quantityChange:Number(req.body.quantity),
       lastQuantity:0,
@@ -18,7 +18,8 @@ if(matchResult){
 const pendingInventory = new Inventory(data);
 const resultInventory = await pendingInventory.save();
 //cteate history
-const pendingHistory = new History(data);
+const historyData ={historyId:data.inventoryId, ...req.body}
+const pendingHistory = new History(historyData);
 const resultHistory = await pendingHistory.save();
 res.status(201).json({message:"create successfull",resultInventory});
 }catch(error){

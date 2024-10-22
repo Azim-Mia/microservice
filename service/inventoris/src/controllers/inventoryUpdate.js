@@ -3,9 +3,9 @@ const updateInventory =async(req,res,next)=>{
   try{
     const {id} = req.params;
     const data ={...req.body}
-    const inventory = await Inventory.findOne({_id:id});
+    const inventory = await Inventory.findOne({inventoryId:id});
    const userId = inventory._id;
-   const hsId = inventory.id;
+   const inventoryIdFind = inventory.inventoryId;
     if(!inventory){
       res.status(404).json({success:false, message:"inventory not found"})
       return;
@@ -24,10 +24,10 @@ const updateInventory =async(req,res,next)=>{
     
   const updateOptions= { new:true, runValidators:true, context:'query'};
     const filter =  {
-    id:hsId,
+    inventoryId:inventoryIdFind,
   quantity:Number(newQuantity),
     historis:{
-    id:hsId,
+    historyId:inventoryIdFind,
       actionType:data.actionType,
       quantityChange:Number(data.quantity),
      newQuantity:newQuantity,
@@ -36,9 +36,10 @@ const updateInventory =async(req,res,next)=>{
   }
   //update Inventory
     const updateResult = await Inventory.findByIdAndUpdate(userId,filter,updateOptions);
+    
     //updata history 
       //create a new history
-  const historyResult =new History({id:hsId,actionType:data.actionType,
+  const historyResult =new History({historyId:inventoryIdFind,actionType:data.actionType,
       quantityChange:data.quantity,
      newQuantity:newQuantity,
      lastQuantity:lastHistory?.newQuantity || 0});

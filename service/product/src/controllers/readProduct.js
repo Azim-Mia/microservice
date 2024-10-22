@@ -2,7 +2,7 @@ const Product = require('../schemas.js');
 const axios =require('axios');
 const readProduct = async(req,res,next)=>{
 try{
-  const findProduct = await Product.find().select("name _id id  inventoryId price ");
+  const findProduct = await Product.find().select("name _id productId inventoryId price quantity");
   if(!findProduct){
     res.status(404).json({success:false, message:"Product is not found"});
   return;
