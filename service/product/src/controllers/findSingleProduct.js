@@ -16,7 +16,7 @@ const datas ={
   sku:findProduct.sku,
   productId:findProduct._id,
 };
-  const createInventory = await axios.post("http://localhost:4002/inventory",datas);
+  const createInventory = await axios.post("http://localhost:4002/inventoris",datas);
   console.log(createInventory.data)
   //asign value inventoryId
   inventoryId = createInventory.data.resultInventory.id;
@@ -33,7 +33,7 @@ const datas ={
   }
 };
 const userId = findProduct._id;
-const getInventory = await axios.get("http://localhost:4002/inventory");
+const getInventory = await axios.get("http://localhost:4002/inventoris");
 const {quantity} = getInventory.data.result[0];
 res.status(200).json({success:true, message:"successfull", 
  findProduct,

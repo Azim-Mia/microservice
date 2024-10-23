@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(xssClean());
 app.use(cors({
-  origin:["http://localhost:3000","http://localhost:8158","http://localhost:4002","http://localhost:4001"],
+  origin:["http://localhost:8081","http://localhost:3000","http://localhost:8158","http://localhost:4002","http://localhost:4001"],
 methot:["PUT","POST","GET","UPDATE"],
 credentials:true,
 }));
