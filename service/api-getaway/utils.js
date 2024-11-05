@@ -6,7 +6,6 @@ const createHandler =(hostname,path,method)=>{
   let url = `${hostname}${path}`;
  req.params && Object.keys(req.params).forEach(param =>{
    url = url.replace(`:${param}`,req.params[param]);
-   console.log(url);
  });
   const {data}= await axios({
     method:method,
@@ -27,6 +26,7 @@ Object.entries(config.services).forEach(([name, service])=>{
   service.routes.forEach((route)=>{
     route.methods.forEach((method)=>{
   const responseResult= createHandler(hostname,route.path, method);
+  //route hit now..
    app[method](`/api${route.path}`,responseResult);
     });
   });

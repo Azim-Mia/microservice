@@ -23,7 +23,7 @@ if(!inventoryCreateSuccess.data){
   res.json({success:false,message:"Product route from inventory problem"});
 }
 // inventory id use as product key 
-const {inventoryId, quantity}=inventoryCreateSuccess.data.resultInventory;
+const {inventoryId, quantity}=inventoryCreateSuccess.data;
 //update product start...
  addProduct.inventoryId=inventoryId || null;
  addProduct.stock = quantity || 0;

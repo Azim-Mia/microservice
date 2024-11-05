@@ -77,4 +77,5 @@ const historySchema= new Schema({
   }
 });
 const History=new model('history', historySchema);
+//module is transfer
 module.exports={Inventory, History};
