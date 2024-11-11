@@ -1,9 +1,8 @@
-import {connectDB} from '../config/db';
+import {connectDB} from './config/db';
 import {default as app} from './app';
-app.get('/', (_req,res)=>{
-  res.json({message:'return successfull'});
-})
-app.listen(4004,()=>{
-  console.log(`http://localhost:4004`);
+require('dotenv').config();
+const server_port = process.env.SERVER_PORT || 5003
+app.listen(server_port,()=>{
+  console.log(`http://localhost:${server_port}`);
   connectDB()
 });

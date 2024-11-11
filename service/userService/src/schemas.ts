@@ -25,4 +25,5 @@ const userSchema = new Schema({
     trim:true,
   }
 },{timestamp:true});
-export const User = new model('userModel', userSchema);
+ const User = new model('User', userSchema);
+export default User;
