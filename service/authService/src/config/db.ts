@@ -7,9 +7,8 @@ export const connectDB =async()=>{
  console.log('Auth service db database connected');
   }catch(error){
     if(error instanceof mongoose.Error){
-      console.log(error.message);
-      return;
-    }
+      console.log(error);
+    };
     throw new Error ("MongoDB ERROR Atlas problem Cheack Network or URL");
   }
 }

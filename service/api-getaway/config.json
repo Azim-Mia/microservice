@@ -15,8 +15,10 @@
       "path":"/products/create",
       "methods":["post"]
       }
-    ]
+    ],
+    "middlewares":[]
   },
+  
     "inventory": {
     "url":"http://localhost:4002",
     "routes":[
@@ -26,9 +28,42 @@
       },
         {
       "path":"/inventoris/:id",
-      "methods":["get","post"]
+      "methods":["get"]
       }
-    ]
+    ],
+    "middlewares":["auth"]
+  },
+      "auth": {
+    "url":"http://localhost:4004",
+    "routes":[
+      {
+      "path":"/auth/users/find",
+      "methods":["get"]
+      },
+            {
+      "path":"/auth/users/register",
+      "methods":["post"]
+      },
+         {
+      "path":"/auth/users/email/verify",
+      "methods":["post"]
+      },
+            {
+      "path":"/auth/users/login",
+      "methods":["post"]
+      }
+    ],
+   "middlewares":[]
+  },
+        "userService": {
+    "url":"http://localhost:4003",
+    "routes":[
+      {
+      "path":"/users/find",
+      "methods":["get"]
+      }
+    ],
+    "middlewares":[]
   }
  }
 }

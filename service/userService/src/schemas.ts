@@ -23,6 +23,10 @@ const userSchema = new Schema({
   phone:{
     type:Number,
     trim:true,
+  },
+  image:{
+    type:String,
+    default:"image is empty"
   }
 },{timestamp:true});
  const User = new model('User', userSchema);

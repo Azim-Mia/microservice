@@ -6,6 +6,7 @@ const userData = z.object({
   authUserId:z.string(),
   name:z.string(),
   email:z.string().email(),
+  image:z.string().optional(),
   address:z.string().optional(),
   phone:z.string().optional()
 });
@@ -15,11 +16,6 @@ const users = userData.safeParse({authUserId:uuid(),...req.body});
 if(!users.success){
    res.status(404).json({error: users.error.errors});
 };
-const email :any = users?.data?.email;
-const exits =await User.findOne({email:email});
- if(exits){
-   return res.status(400).json({success:false, message:"user email is exits"});
- };
 const userAdd = new User(users.data);
 if(!userAdd){
   return res.status(400).json({success:false, message:"user userAdd data problem"});
