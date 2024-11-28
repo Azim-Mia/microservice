@@ -10,5 +10,5 @@ productRouter.post('/create',limiter, createProduct);
 productRouter.get('/find', readProduct);
 productRouter.get('/find/:id', findSingleProduct);
 productRouter.put('/update/:id', updateProduct);
-productRouter.delete('/delete/:id',deleteProduct);
+productRouter.delete('/delete',deleteProduct);
 module.exports = productRouter;

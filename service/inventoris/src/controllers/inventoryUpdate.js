@@ -15,7 +15,6 @@ const updateInventory =async(req,res,next)=>{
    const lastHistory= history.toSorted((a,b)=>b.createAt - a.createAt);
    //change quantity
     let newQuantity = inventory.historis[0].newQuantity || 0;
-    console.log(newQuantity)
     if(data.actionType == "IN"){
       newQuantity += Number(data.quantity);
     }else{
@@ -26,6 +25,7 @@ const updateInventory =async(req,res,next)=>{
     const filter =  {
     inventoryId:inventoryIdFind,
   quantity:Number(newQuantity),
+  actionType:req.body.actionType,
     historis:{
     historyId:inventoryIdFind,
       actionType:data.actionType,

@@ -17,6 +17,10 @@ credentials:true,
 app.use('/inventoris', inventoryRouter);
 app.use((req,res)=>{
   res.send("Route not Found");
+});
+app.use((err, req, res, next)=>{
+  console.error(err.stack);
+ res.status(500).json({success:false, message:"Internal Server Error"})
 })
 module.exports = app;
 /*app.use(morgan());

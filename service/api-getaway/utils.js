@@ -14,6 +14,8 @@ const createHandler =(hostname,path,method)=>{
     data:req.body,
     headers:{
       origin:"http://localhost:8081",
+      'x-user-id':req.headers['x-user-id'] || '',
+      'x-user-name':req.headers['x-user-name'] || '',
     }
    });
   res.json(data)
@@ -35,14 +37,13 @@ Object.entries(config.services).forEach(([name, service])=>{
   const hostname = service.url;
   service.routes.forEach((route)=>{
  
-  //call this function
-  const middleware = getMiddleware(service.middlewares);
-  
-    route.methods.forEach((method)=>{
+route.methods.forEach((method)=>{
     //call this function
-  const responseResult= createHandler(hostname,route.path, method);
+  const emdpoint= createHandler(hostname,route.path, method);
+   //call this function
+  const middleware = getMiddleware(route?.middlewares);
   //route hit now..
-  app[method](`/api${route.path}`,middleware,responseResult);
+  app[method](`/api${route.path}`,middleware,emdpoint);
     });
   });
 });

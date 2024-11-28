@@ -11,11 +11,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/auth', userRouter as any);
 app.use((req:Request,res:Response,next:NextFunction)=>{
-  try{
-    res.status(404).send("Not Found Route");
-  }catch(error:any){
-   res.status(500).send('Internal server error');
-  };
-  next();
+    res.status(404).send("Not Found Route")
+});
+app.use((err:any, _req:Request, res:Response, _next:NextFunction)=>{
+  console.error(err.stack);
+ res.status(500).json({success:false, message:"Internal Server Error"})
 });
 export default app

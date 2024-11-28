@@ -7,7 +7,7 @@ const findSingle = async(req,res,next)=>{
     //decending History
     const dscn = history.toSorted((a,b)=>b.createAt - a.createAt);
     if(!findInventory){
-      res.json({success:false, message:"Inventory && History not found"});
+      res.json({success:false, message:"Inventory Id not found. Correct Id parse body"});
       return
     }else{
       res.json({success:true, message:"return successfull",result:findInventory, History:dscn});
