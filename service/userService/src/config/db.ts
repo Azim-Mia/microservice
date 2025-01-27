@@ -5,7 +5,7 @@ export const connectDB =async()=>{
   try{
  await mongoose.connect(db_url);
  console.log('User service db database connected');
-  }catch(error){
+  }catch(error:any){
     if(error instanceof mongoose.Error){
       console.log(error.message);
       return;

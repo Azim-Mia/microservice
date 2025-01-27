@@ -1,7 +1,9 @@
 const { Schema, model } =require('mongoose');
+import { uuid } from 'uuidv4';
 const userSchema = new Schema({
   authUserId:{
     type:String,
+    default:"default_" + uuid(),
     unique:true,
   },
   name:{
@@ -15,6 +17,7 @@ const userSchema = new Schema({
     type:String,
     trim:true,
     maxLength:[100, "max length 100"],
+    unique:true,
   },
   address:{
     type:String,
